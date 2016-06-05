@@ -186,10 +186,10 @@ function completeCreateTrans() {
 	ajaxAction(json);
 }
 
-function example() {
+function example(isNba) {
 	
 	var exampleNum = $("#sel2 option:selected").index();
-	var json = 'method=example&num=' + exampleNum;
+	var json = 'method=example&num=' + exampleNum + '&nba=' + isNba;
 	ajaxAction(json);
 }
 
@@ -202,7 +202,9 @@ function ajaxAction(data) {
     	success: function(result){
     		
 	    	$("#solid").html(result);
-    		adjustFunctionality();
+	    	if (!dnaMode) {
+	    		adjustFunctionality();
+	    	}
     		adjustScale(0.66, $('.graph'));
     		clearMessages();
     	    if (dnaMode) {

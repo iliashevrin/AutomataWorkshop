@@ -123,18 +123,22 @@ public class GetGraph extends HttpServlet {
 				
 			} else if ("createPair".equals(method)) {
 				
+				isNba = false;
 				createPair(request);
 				
 			} else if ("deletePair".equals(method)) {
 				
+				isNba = false;
 				deletePair(request);
 				
 			} else if ("addToPair".equals(method)) {
 				
+				isNba = false;
 				addToPair(request);
 				
 			} else if ("removeFromPair".equals(method)) {
 				
+				isNba = false;
 				removeFromPair(request);
 			}
 			
@@ -346,13 +350,30 @@ public class GetGraph extends HttpServlet {
 	private void loadExample(HttpServletRequest request) {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
-		String nba = Examples.NBA_EXAMPLES[num];
+		boolean isNba = Boolean.parseBoolean(request.getParameter("nba"));
 		
-		int divide = nba.substring(0, nba.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
-		states = nba.substring(0, divide + 2);
-		transitions = nba.substring(divide + 2, nba.length());
+		if (isNba) {
+			String nba = Examples.NBA_EXAMPLES[num];
 		
-		stateNumber = states.split(System.getProperty("line.separator")).length;
+			int divide = nba.substring(0, nba.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
+			states = nba.substring(0, divide + 2);
+			transitions = nba.substring(divide + 2, nba.length());
+		
+			stateNumber = states.split(System.getProperty("line.separator")).length;
+		} else {
+			this.isNba = false;
+			String nsa = Examples.NSA_EXAMPLES[num];
+			
+			// Divide states and rest
+			int divide1 = nsa.substring(0, nsa.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
+			int divide2 = nsa.substring(0, nsa.indexOf("_")).lastIndexOf(System.getProperty("line.separator"));
+			states = nsa.substring(0, divide1 + 2);
+			transitions = nsa.substring(divide1 + 2, divide2 + 2);
+			grPairs = nsa.substring(divide2 + 2, nsa.length());
+			
+			stateNumber = states.split(System.getProperty("line.separator")).length;
+			grNumber = grPairs.split(System.getProperty("line.separator")).length / 2;
+		}
 	}
 	
 	private void createPair(HttpServletRequest request) {

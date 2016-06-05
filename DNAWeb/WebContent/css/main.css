@@ -38,10 +38,17 @@ polygon.chosen {
 }
 
 #sel1, #sel2 {
-	width: 15%;
     margin-top: 10px;
     margin-bottom: 10px;
     display: inline-block;
+}
+
+#sel1 {
+	width: 60px;
+}
+
+#sel2 {
+	width: 120px;
 }
 
 hr { 
@@ -87,5 +94,5 @@ hr {
 
 .container {
 	margin-left: 10px;
-	width: 900px;
+	width: 1100px;
 }
