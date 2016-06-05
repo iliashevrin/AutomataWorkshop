@@ -15,8 +15,20 @@ ellipse.chosen {
 	fill: aqua;
 }
 
-path.chosen {
+.edge path.chosen {
 	stroke: aqua;
+}
+
+.node path.chosen {
+	fill: aqua;
+}
+
+.node text.chosen {
+	stroke: black;
+}
+
+.edge text.chosen {
+	fill: aqua;
 }
 
 polygon.chosen {
@@ -24,7 +36,7 @@ polygon.chosen {
 }
 
 #warning, #info, #success {
-    max-width:835px;
+    max-width:1100px;
     display: none;
 }
 

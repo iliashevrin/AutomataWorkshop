@@ -5,6 +5,7 @@
 var chosenNode = "";
 var chosenEdge = "";
 var chosenSet = "";
+var chosenSetElem = "";
 var createTransMode = false;
 var addToPairMode = false;
 var tempStateFromName = "";
@@ -29,8 +30,11 @@ function deletePair() {
 	if (chosenSet != "") {
 		
 		var title = $(chosenSet).parent().find("title").text();
-		//$(chosenNode).parent().find("ellipse").removeClass("chosen");
-		//chosenNode = "";
+		
+		$(chosenSet).parent().find("polygon").removeClass("chosen");
+		$(chosenSet).parent().find("path").removeClass("chosen");
+		$(chosenSet).parent().find("text").removeClass("chosen");
+		chosenSet = "";
 		
 		var json = 'method=deletePair&pair=' + title;
 		ajaxAction(json);
@@ -56,8 +60,11 @@ function addToPair() {
 			$("#warning").hide();
 			
 			tempStateFromName = fromName;
-			//$(chosenNode).parent().find("ellipse").removeClass("chosen");
-			//chosenNode = "";
+			
+			$(chosenSet).parent().find("polygon").removeClass("chosen");
+			$(chosenSet).parent().find("path").removeClass("chosen");
+			$(chosenSet).parent().find("text").removeClass("chosen");
+			chosenSet = "";
 			
 		} else {
 			$("#warning").text("Please choose a state first");
@@ -70,8 +77,11 @@ function addToPair() {
 function completeAddToPair() {
 	
 	var set = $(chosenSet).parent().find("title").text();
-	//$(chosenNode).parent().find("ellipse").removeClass("chosen");
-	//chosenNode = "";
+	
+	$(chosenSet).parent().find("polygon").removeClass("chosen");
+	$(chosenSet).parent().find("path").removeClass("chosen");
+	$(chosenSet).parent().find("text").removeClass("chosen");
+	chosenSet = "";
 	
 	var json = 'method=addToPair&set=' + set + '&state=' + tempStateFromName;
 	ajaxAction(json);
@@ -79,12 +89,24 @@ function completeAddToPair() {
 
 function removeFromPair() {
 	
-	var set = $(chosenSet).parent().find("title").text();
-	var state = $(chosenSet).text();
+	if (chosenSet != "") {
+
+		var set = $(chosenSet).parent().find("title").text();
+		var state = $(chosenSet).text();
 	
-	if (!(state[0] == "R" || state[0] == "G")) {
-		var json = 'method=removeFromPair&set=' + set + '&state=' + state;
-		ajaxAction(json);
+		$(chosenSet).parent().find("polygon").removeClass("chosen");
+		$(chosenSet).parent().find("path").removeClass("chosen");
+		$(chosenSet).parent().find("text").removeClass("chosen");
+		chosenSet = "";
+		
+		if (!(state[0] == "R" || state[0] == "G")) {
+			var json = 'method=removeFromPair&set=' + set + '&state=' + state;
+			ajaxAction(json);
+		}
+	} else {
+		$("#warning").text("Please choose a state to remove from a set");
+		$("#warning").show();
+		$("#info").hide();
 	}
 }
 
@@ -271,16 +293,20 @@ function adjustScale(scale, graph) {
 function clickEdge(text, edge) {
 	var path = edge.find("path");
 	var polygon = edge.find("polygon");
+	var title = edge.find("text");
 	
 	if (text == chosenEdge) {
 		path.removeClass("chosen");
 		polygon.removeClass("chosen");
+		title.removeClass("chosen");
 		chosenEdge = "";
 	} else {
 		path.addClass("chosen");
 		polygon.addClass("chosen");
+		title.addClass("chosen");
 		$(chosenEdge).parent().find("path").removeClass("chosen");
 		$(chosenEdge).parent().find("polygon").removeClass("chosen");
+		$(chosenEdge).parent().find("text").removeClass("chosen");
 		chosenEdge = text;
 	}
 }
@@ -304,22 +330,30 @@ function clickNode(text, node) {
 			}
 		}
 		
-	} else  {   // NSA set 
+	} else  {   // NSA set
+
+		var polygon = node.find("polygon");
+		var paths = node.find("path");
 		
-		chosenSet = text;
-		
-		//if (text == chosenSet) {
-			//ellipse.removeClass("chosen");
-		//	chosenSet = "";
-		//} else {
-			//ellipse.addClass("chosen");
-			//$(chosenNode).parent().find("ellipse").removeClass("chosen");
-		//	chosenSet = text;
+		if (text == chosenSet) {
+			polygon.removeClass("chosen");
+			paths.removeClass("chosen");
+			$(text).removeClass("chosen");
+			chosenSet = "";
+		} else {
+
+			$(chosenSet).parent().find("polygon").removeClass("chosen");
+			$(chosenSet).parent().find("path").removeClass("chosen");
+			$(chosenSet).parent().find("text").removeClass("chosen");
+			chosenSet = text;
+			polygon.addClass("chosen");
+			paths.addClass("chosen");
+			$(chosenSet).addClass("chosen");
 			
 			if (addToPairMode) {
 				completeAddToPair();
-			}	
-		//}
+			}
+		}
 	}
 
 	

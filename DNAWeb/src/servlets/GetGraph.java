@@ -142,7 +142,7 @@ public class GetGraph extends HttpServlet {
 				removeFromPair(request);
 			}
 			
-			parseString = buildNBAGUIString();
+			parseString = buildGUIString();
 		}
 		
 		GraphViz gv = new GraphViz();
@@ -472,7 +472,7 @@ public class GetGraph extends HttpServlet {
 		dnaTransitions = dna.substring(divide + 2, dna.length());
 	}
 
-	private String buildNBAGUIString() {
+	private String buildGUIString() {
 		
 		// No states and no transitions
 		//if (states.equals("")) {
@@ -488,7 +488,7 @@ public class GetGraph extends HttpServlet {
 		
 		accepting.append("node [shape = doublecircle]; ");
 		starting.append("node [fixedsize = true, width = 0, height = 0, style = invisible]; ");
-		pairs.append("node [shape = record, style=rounded]; ");
+		pairs.append("node [shape = Mrecord, style=filled, fillcolor=white]; ");
 		regular.append("node [shape = circle]; ");
 		
 		String stateName = "";
