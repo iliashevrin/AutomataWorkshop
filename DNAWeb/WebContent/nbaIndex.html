@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NBA to DNA</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<div id="upper">
+		<div class="container">
+			<h1 id="NBAtoDNA">NBA to DNA Constructor</h1>
+			<button id="new-state" onclick="createState()" type="button" class="btn btn-primary">New NBA state</button>
+			<button id="delete-state" onclick="deleteState()" type="button" class="btn btn-primary">Delete NBA state</button>
+			<button id="new-tran" onclick="createTrans()" type="button" class="btn btn-primary">New transition</button>
+		 	<button id="delete-tran" onclick="deleteTrans()" type="button" class="btn btn-primary">Delete transition</button>
+		 	<button id="build-dna" onclick="buildDNA()" type="button" class="btn btn-primary">Build DNA</button>
+		 	<button id="reset" onclick="reset()" type="button" class="btn btn-primary">Reset</button>	
+		</div>
+	  	<div class="container">
+	  		<div class="checkbox" id="check1">
+		    		<label><input id="starting" type="checkbox"> Starting </label>
+		    		<label><input id="accepting" type="checkbox"> Accepting </label>
+		  	</div>
+		  	<select class="form-control" id="sel1">
+		    	<option selected>0</option>
+		    	<option>1</option>
+		 	 </select>
+		 	 <select class="form-control" id="sel2">
+		    	<option selected>Example 1</option>
+		    	<option>Example 2</option>
+		    	<option>Example 3</option>
+		 	 </select>
+		 	 <button id="example" onclick="example()" type="button" class="btn btn-primary">Load Example</button>
+		</div>
+	  	<div class="container">
+	  		<div class="alert alert-warning" id="warning"></div>
+	  		<div class="alert alert-info" id="info"></div>
+	  	</div>
+  	</div>
+	<div id="solid">
+	</div>
+	
+</body>
+</html>
