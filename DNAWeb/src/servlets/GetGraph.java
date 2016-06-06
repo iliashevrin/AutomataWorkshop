@@ -182,14 +182,29 @@ public class GetGraph extends HttpServlet {
 			}
 		}
 		
-		String parents[] = innerTree.substring(1, innerTree.indexOf("]")).split(" ");
-		String nba[] = innerTree.substring(innerTree.indexOf(",") + 2, innerTree.length() - 1).split(" ");
-		String innerStates[] = new String[parents.length + 1];
+		String[] arrays = innerTree.split(",");
+		String[] parents;
+		String[] states;
+		String[] annotations = null;
+		String[] innerStates;
+		
+		if (isNba) {
+			parents = arrays[0].substring(1, arrays[0].length() - 1).split(" ");
+			states = arrays[1].substring(1, arrays[0].length() - 1).split(" ");
+			//String parents[] = innerTree.substring(1, innerTree.indexOf("]")).split(" ");
+			//String states[] = innerTree.substring(innerTree.indexOf(",") + 2, innerTree.length() - 1).split(" ");
+		} else {
+			parents = arrays[0].substring(1, arrays[0].length() - 1).split(" ");
+			states = arrays[1].substring(1, arrays[0].length() - 1).split(" ");
+			annotations = arrays[2].substring(1, arrays[0].length() - 1).split(" ");
+		}
+		
+		innerStates = new String[parents.length + 1];
 		Arrays.fill(innerStates, "");
 		
-		for (int i = 0; i < nba.length; i++) {
-			if (!nba[i].equals("$")) {
-				int node = Integer.parseInt(nba[i]);
+		for (int i = 0; i < states.length; i++) {
+			if (!states[i].equals("$")) {
+				int node = Integer.parseInt(states[i]);
 				innerStates[node] += "q" + i + ", ";
 				
 				while (node != 0) {
@@ -212,6 +227,11 @@ public class GetGraph extends HttpServlet {
 				sb.append(i);
 				sb.append(" [label=\"");
 				sb.append(i);
+				if (!isNba) {
+					sb.append(", (");
+					sb.append(annotations[i]);
+					sb.append(")");
+				}
 				sb.append(": {");
 				sb.append(innerStates[i]);
 				sb.append("}\"]");
