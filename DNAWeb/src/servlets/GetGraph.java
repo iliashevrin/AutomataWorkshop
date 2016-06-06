@@ -49,22 +49,19 @@ public class GetGraph extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String nba = request.getParameter("nba");
-		String nsa = request.getParameter("nsa");
+		String type = request.getParameter("type");
+		String method = request.getParameter("method");
 		
-		if (nba != null && nba.equals("true")) {
+		if ("nba".equals(type)) {
 			isNba = true;
-			response.sendRedirect("nbaIndex.html");
-			resetGraph();
-			return;
-		} else if (nsa != null && nsa.equals("true")) {
+		} else if ("nsa".equals(type)) {
 			isNba = false;
-			response.sendRedirect("nsaIndex.html");
-			resetGraph();
+		}
+		
+		if (method == null) {
 			return;
 		}
 		
-		String method = request.getParameter("method");
 		String parseString = "";
 		
 		if ("buildDNA".equals(method)) {
@@ -350,7 +347,6 @@ public class GetGraph extends HttpServlet {
 	private void loadExample(HttpServletRequest request) {
 		
 		int num = Integer.parseInt(request.getParameter("num"));
-		boolean isNba = Boolean.parseBoolean(request.getParameter("nba"));
 		
 		if (isNba) {
 			String nba = Examples.NBA_EXAMPLES[num];
@@ -361,7 +357,6 @@ public class GetGraph extends HttpServlet {
 		
 			stateNumber = states.split(System.getProperty("line.separator")).length;
 		} else {
-			this.isNba = false;
 			String nsa = Examples.NSA_EXAMPLES[num];
 			
 			// Divide states and rest

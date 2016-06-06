@@ -17,7 +17,7 @@
 <body>
 	<div id="upper">
 		<div class="container">
-			<h1 id="NBAtoDNA">NBA to DNA Constructor</h1>
+			<h1 id="title">NBA to DNA Constructor</h1>
 			<button id="new-state" onclick="createState()" type="button" class="btn btn-primary">New NBA state</button>
 			<button id="delete-state" onclick="deleteState()" type="button" class="btn btn-primary">Delete NBA state</button>
 			<button id="new-tran" onclick="createTrans()" type="button" class="btn btn-primary">New transition</button>
@@ -39,7 +39,7 @@
 		    	<option>Example 2</option>
 		    	<option>Example 3</option>
 		 	 </select>
-		 	 <button id="example" onclick="example(true)" type="button" class="btn btn-primary">Load Example</button>
+		 	 <button id="example" onclick="example()" type="button" class="btn btn-primary">Load Example</button>
 		</div>
 	  	<div class="container">
 	  		<div class="alert alert-warning" id="warning"></div>
@@ -48,6 +48,6 @@
   	</div>
 	<div id="solid">
 	</div>
-	
+	<div id="type" style="display:none">nba</div>
 </body>
 </html>

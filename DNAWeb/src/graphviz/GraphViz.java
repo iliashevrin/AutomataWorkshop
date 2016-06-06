@@ -139,13 +139,13 @@ public class GraphViz
      * tempDir = /tmp
      */
     public GraphViz() {
-        if (GraphViz.osName.equals("Windows10")) {
+        if (GraphViz.osName.indexOf("Windows") >= 0) {
             this.tempDir = "d:/NBAtoDNA";
             this.executable = "c:/Program Files (x86)/Graphviz 2.28/bin/dot.exe";
         } else if (GraphViz.osName.equals("MacOSX")) {
             this.tempDir = "/tmp";
             this.executable = "/usr/local/bin/dot";
-        } else if (GraphViz.osName.equals("Linux")) {
+        } else if (GraphViz.osName.indexOf("nix") >= 0 || GraphViz.osName.indexOf("nux") >= 0) {
             this.tempDir = "/tmp";
             this.executable = "/usr/bin/dot";
         }

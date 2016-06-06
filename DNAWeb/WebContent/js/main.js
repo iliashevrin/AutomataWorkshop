@@ -208,14 +208,16 @@ function completeCreateTrans() {
 	ajaxAction(json);
 }
 
-function example(isNba) {
+function example() {
 	
 	var exampleNum = $("#sel2 option:selected").index();
-	var json = 'method=example&num=' + exampleNum + '&nba=' + isNba;
+	var json = 'method=example&num=' + exampleNum;
 	ajaxAction(json);
 }
 
 function ajaxAction(data) {
+	
+	data += "&type=" + $("#type").html();
 	
     $.ajax({
     	url: "GetGraph",
