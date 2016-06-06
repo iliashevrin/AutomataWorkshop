@@ -3,19 +3,20 @@ package graphviz;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.xml.bind.helpers.NotIdentifiableEventImpl;
+
 import dataobjects.DNA;
 import dataobjects.DNAState;
 import dataobjects.DNATreeNode;
 import dataobjects.NBA;
 import dataobjects.NBAState;
 import dataobjects.StateLetterPair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class GraphVizHelper {
 
 	
 	public static NBA NBAFromGraphViz(String graphViz) {
-		throw new NotImplementedException();
+		return null;
 	}
 	
 	public static String graphVizFromNBA(NBA nba) {
@@ -81,7 +82,7 @@ public class GraphVizHelper {
 	}
 	
 	public static DNA DNAFromGraphViz(String graphViz) {
-		throw new NotImplementedException();
+		return null;
 	}
 	
 	public static String graphVizFromDNA(DNA dna) {
