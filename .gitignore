@@ -4,4 +4,6 @@
 /.metadata/*
 /Servers/
 /Servers/*
+/.recommenders/
+/.recommenders/*
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dataobjects.NBAtoDNA;
+import dataobjects.NSAtoDNA;
 import graphviz.GraphViz;
 
 /**
@@ -78,7 +79,7 @@ public class GetGraph extends HttpServlet {
 				nbaGraphVizString += grPairs;
 				
 				// NSA to DNA
-				dnaGraphVizString = NBAtoDNA.buildDNA(nbaGraphVizString);
+				dnaGraphVizString = NSAtoDNA.buildDNA(nbaGraphVizString);
 			} else {
 				
 				// NBA to DNA
