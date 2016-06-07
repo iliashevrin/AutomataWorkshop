@@ -55,11 +55,11 @@ public class NSA {
 		
 		BufferedReader bufferedReader = new BufferedReader(new StringReader(nsa_source));
 		
-		Pattern pstate_00 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"q(\\d+)\"\\]"); //NOT starting, NOT accepting
+		Pattern pstate_00 = Pattern.compile("(\\s*)q(\\d+) \\[label=\"q(\\d+)\"\\]"); //NOT starting, NOT accepting
 		//Pattern pstate_01 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"q(\\d+)\\$\"\\]"); //NOT starting, accepting
-		Pattern pstate_10 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"\\*q(\\d+)\"\\]"); //starting, NOT accepting
-		Pattern pstate_11 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"\\*q(\\d+)\\$\"\\]"); //starting, accepting
-		Pattern ptransition = Pattern.compile("(\\s+)q(\\d+) -> q(\\d+) \\[label=(\\S+)\\]");
+		Pattern pstate_10 = Pattern.compile("(\\s*)q(\\d+) \\[label=\"\\*q(\\d+)\"\\]"); //starting, NOT accepting
+		Pattern pstate_11 = Pattern.compile("(\\s*)q(\\d+) \\[label=\"\\*q(\\d+)\\$\"\\]"); //starting, accepting
+		Pattern ptransition = Pattern.compile("(\\s*)q(\\d+) -> q(\\d+) \\[label=(\\S+)\\]");
 		Pattern pSets = Pattern.compile("(\\S)_(\\d+) (.*)");
 		Matcher m; // get a matcher object
 		

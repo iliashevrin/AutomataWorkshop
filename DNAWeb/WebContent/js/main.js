@@ -266,7 +266,7 @@ function adjustTooltip() {
 		    	type: "POST"
 		    }).responseText;
 		    response = $(response);
-		    adjustScale(1, response.find(".graph"));
+		    adjustScale(0.5, response.find(".graph"));
 		    return $('<div>').append(response).clone().html();
 		}
 	});
@@ -364,9 +364,11 @@ function clickNode(text, node) {
 
 function buildDNA() {
 	
+	var type = $("#type").html();
+	
 	// A way to test if there are starting and accepting states
-	if ($("text:contains('start')").size() > 0 &&
-			$("ellipse+ellipse").size() > 0) {
+	if ($("text:contains('start')").size() > 0 && ((type == "nsa") || ((type == "nba") &&
+			$("ellipse+ellipse").size() > 0))) {
 		
 		$(".container button, .container input, .container select").prop( "disabled", true );
 		$("#reset").prop( "disabled", false );
@@ -378,7 +380,7 @@ function buildDNA() {
 		
 	} else {
 		$("#warning").text("Please make sure that graph contains at least one" +
-				" starting state and at least one accepting state");
+				" starting state and in case of a NBA at least one accepting state");
 		$("#warning").show();
 	}
 }

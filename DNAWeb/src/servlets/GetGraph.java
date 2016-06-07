@@ -191,13 +191,13 @@ public class GetGraph extends HttpServlet {
 		
 		if (isNba) {
 			parents = arrays[0].substring(1, arrays[0].length() - 1).split(" ");
-			states = arrays[1].substring(1, arrays[0].length() - 1).split(" ");
+			states = arrays[1].substring(1, arrays[1].length() - 1).split(" ");
 			//String parents[] = innerTree.substring(1, innerTree.indexOf("]")).split(" ");
 			//String states[] = innerTree.substring(innerTree.indexOf(",") + 2, innerTree.length() - 1).split(" ");
 		} else {
 			parents = arrays[0].substring(1, arrays[0].length() - 1).split(" ");
-			states = arrays[1].substring(1, arrays[0].length() - 1).split(" ");
-			annotations = arrays[2].substring(1, arrays[0].length() - 1).split(" ");
+			states = arrays[1].substring(1, arrays[1].length() - 1).split(" ");
+			annotations = arrays[2].substring(1, arrays[2].length() - 1).split(" ");
 		}
 		
 		innerStates = new String[parents.length + 1];
