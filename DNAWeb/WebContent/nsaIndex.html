@@ -15,13 +15,13 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   	<script src="js/main.js"></script>
   	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<link rel="stylesheet" type="text/css" href="css/main.css">
   	
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,14 +76,14 @@
                     <div class="col-lg-12">
                     	<div id="upper">
 					 		<div class="container">
-					 			<h1 id="title">NSA to DNA Constructor</h1>
-					 			<button id="new-state" onclick="createState()" type="button" class="btn btn-info">New NSA state</button>
-					 			<button id="delete-state" onclick="deleteState()" type="button" class="btn btn-info">Delete NSA state</button>
-					 			<button id="new-tran" onclick="createTrans()" type="button" class="btn btn-info">New transition</button>
-					 		 	<button id="delete-tran" onclick="deleteTrans()" type="button" class="btn btn-info">Delete transition</button>
-					 		 	<button id="build-dna" onclick="buildDNA()" type="button" class="btn btn-info">Build DNA</button>
-					 		 	<button id="create-pair" onclick="createPair()" type="button" class="btn btn-info">Create G-R Pair</button>	
-					 		 	<button id="add-to-pair" onclick="addToPair()" type="button" class="btn btn-info">Add to G-R Pair</button>
+					 			<h3 id="title">NSA to DNA Constructor</h3>
+					 			<button id="new-state" onclick="createState()" type="button" class="btn-xs btn-info">New NSA state</button>
+					 			<button id="delete-state" onclick="deleteState()" type="button" class="btn-xs btn-info">Delete NSA state</button>
+					 			<button id="new-tran" onclick="createTrans()" type="button" class="btn-xs btn-info">New transition</button>
+					 		 	<button id="delete-tran" onclick="deleteTrans()" type="button" class="btn-xs btn-info">Delete transition</button>
+					 		 	<button id="build-dna" onclick="buildDNA()" type="button" class="btn-xs btn-info">Build DNA</button>
+					 		 	<button id="create-pair" onclick="createPair()" type="button" class="btn-xs btn-info">Create G-R Pair</button>	
+					 		 	<button id="add-to-pair" onclick="addToPair()" type="button" class="btn-xs btn-info">Add to G-R Pair</button>
 					 		</div>
 					 	  	<div class="container">
 					 	  		<div class="checkbox" id="check1">
@@ -99,23 +99,23 @@
 					 		    	<option>Example 3</option>
 					 		    	<option>Example 4</option>
 					 		 	 </select> 
-					 		 	 <button id="example" onclick="example(false)" type="button" class="btn btn-info">Load Example</button>
+					 		 	 <button id="example" onclick="example(false)" type="button" class="btn-xs btn-info">Load Example</button>
 					 		 	 
-					 		 	 <button id="reset" onclick="reset()" type="button" class="btn btn-info">Reset</button>
-					 		 	 <button id="delete-pair" onclick="deletePair()" type="button" class="btn btn-info">Delete G-R Pair</button>
-					 		 	 <button id="remove-from-pair" onclick="removeFromPair()" type="button" class="btn btn-info">Delete from G-R Pair</button>
+					 		 	 <button id="reset" onclick="reset()" type="button" class="btn-xs btn-info">Reset</button>
+					 		 	 <button id="delete-pair" onclick="deletePair()" type="button" class="btn-xs btn-info">Delete G-R Pair</button>
+					 		 	 <button id="remove-from-pair" onclick="removeFromPair()" type="button" class="btn-xs btn-info">Delete from G-R Pair</button>
 					 		</div>
 					 		<div class="container">
 					 	  		<div class="alert alert-warning" id="warning"></div>
 					 	  		<div class="alert alert-info" id="info"></div>
 					 	  	</div>
 					 	  	<div class="container">
-					 	  		<button id="first-step" onclick="firstStep()" type="button" class="btn btn-info">First Step</button>
-					 	  		<button id="prev-step" onclick="prevStep()" type="button" class="btn btn-info">Previous Step</button>
-					 	  		<button id="next-step" onclick="nextStep()" type="button" class="btn btn-info">Next Step</button>
-					 	  		<button id="last-step" onclick="lastStep()" type="button" class="btn btn-info">Last Step</button>
+					 	  		<button id="first-step" onclick="firstStep()" type="button" class="btn-xs btn-info">First Step</button>
+					 	  		<button id="prev-step" onclick="prevStep()" type="button" class="btn-xs btn-info">Previous Step</button>
+					 	  		<button id="next-step" onclick="nextStep()" type="button" class="btn-xs btn-info">Next Step</button>
+					 	  		<button id="last-step" onclick="lastStep()" type="button" class="btn-xs btn-info">Last Step</button>
 					 	  	</div>
-					 	  	<a href="#menu-toggle" class="btn btn-info" id="menu-toggle">Toggle Menu</a>
+					 	  	<a href="#menu-toggle" class="btn-xs btn-info" id="menu-toggle">Toggle Menu</a>
 					   	</div>
 					 	<div id="solid">
 					 	</div>

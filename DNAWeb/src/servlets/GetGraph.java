@@ -581,6 +581,8 @@ public class GetGraph extends HttpServlet {
 		}
 		
 		StringBuilder result = new StringBuilder();
+		result.append("rankdir=LR");
+		result.append(System.getProperty("line.separator"));
 		result.append(regular.toString());
 		result.append(System.getProperty("line.separator"));
 		result.append(accepting.toString());
@@ -613,6 +615,8 @@ public class GetGraph extends HttpServlet {
 		
 		String[] lines = dnaStates.split(System.getProperty("line.separator"));
 		
+		graphViz.append("rankdir=LR");
+		graphViz.append(System.getProperty("line.separator"));
 		graphViz.append("node [shape = circle]; ");
 		for (int i = 0; i < lines.length; i++) {
 			graphViz.append("Q");

@@ -7,6 +7,10 @@
     padding-top: 270px;
 }
 
+.btn-xs {
+	width: 140px;
+}
+
 text {
 	cursor: pointer;
 }
@@ -15,7 +19,7 @@ ellipse.chosen {
 	fill: aqua;
 }
 
-path.chosen {
+.edge path.chosen {
 	stroke: aqua;
 }
 
@@ -23,9 +27,23 @@ polygon.chosen {
 	fill: aqua;
 }
 
+.node path.chosen {
+ 	fill: aqua;
+}
+ 
+.node text.chosen {
+ 	stroke: black;
+}
+ 
+.edge text.chosen {
+ 	fill: aqua;
+}
+ 
 #warning, #info, #success {
-    max-width:835px;
+    max-width:1100px;
     display: none;
+    padding: 5px;
+    margin-bottom: 0px;
 }
 
 #check1 {
@@ -42,6 +60,16 @@ polygon.chosen {
     margin-top: 10px;
     margin-bottom: 10px;
     display: inline-block;
+    height: auto;
+    font-size:12px;
+}
+
+#sel1 {
+ 	width: 60px;
+}
+
+#sel2 {
+	width: 120px;
 }
 
 hr { 
@@ -51,32 +79,13 @@ hr {
     margin-right: auto;
     border-style: inset;
     border-width: 1px;
-} 
-
-#reset {
-	padding: 6px 44px;
-}
-#build-dna {
-	padding: 6px 30px;
-}
-
-#new-state {
-	padding: 6px 20px;
-}
-
-#new-tran {
-	padding: 6px 22px;
-}
-
-#delete-tran {
-	padding: 6px 15px;
 }
 
 #upper {
 	position: fixed;
 	background-color: skyblue;
 	width: 100%;
-	height: 200px;
+	height: 185px;
 	border-bottom: 1px solid #9A9A9A;
 }
 
@@ -84,12 +93,8 @@ hr {
 	margin: 0px 113px 5px;
 }
 
-.alert {
-	padding: 5px;
-    margin-bottom: 0px;
-}
-
 .container {
 	margin-left: 10px;
-	width: 900px;
+	width: 1100px;
+	font-size:12px;
 }

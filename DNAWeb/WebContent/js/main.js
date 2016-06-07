@@ -40,7 +40,7 @@ function deletePair() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a G-R pair to delete");
-		$("#upper").css("height", "270px");
+		$("#upper").css("height", "210px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -57,7 +57,7 @@ function addToPair() {
 			addToPairMode = true;
 			var fromName = $(chosenNode).parent().find("title").text();
 			$("#info").text("Please choose a set to add state " + fromName + " to");
-			$("#upper").css("height", "270px");
+			$("#upper").css("height", "210px");
 			$("#info").show();
 			$("#warning").hide();
 			
@@ -70,7 +70,7 @@ function addToPair() {
 			
 		} else {
 			$("#warning").text("Please choose a state first");
-			$("#upper").css("height", "270px");
+			$("#upper").css("height", "210px");
 			$("#warning").show();
 			$("#info").hide();
 		}
@@ -108,7 +108,7 @@ function removeFromPair() {
 		}
 	} else {
 		$("#warning").text("Please choose a state to remove from a set");
-		$("#upper").css("height", "270px");
+		$("#upper").css("height", "210px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -147,7 +147,7 @@ function deleteState() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a state to delete");
-		$("#upper").css("height", "270px");
+		$("#upper").css("height", "210px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -170,7 +170,7 @@ function deleteTrans() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a transition to delete");
-		$("#upper").css("height", "270px");
+		$("#upper").css("height", "210px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -187,7 +187,7 @@ function createTrans() {
 			createTransMode = true;
 			var fromName = $(chosenNode).parent().find("title").text();
 			$("#info").text("Please choose a destination state to create transition from " + fromName);
-			$("#upper").css("height", "270px");
+			$("#upper").css("height", "210px");
 			$("#info").show();
 			$("#warning").hide();
 			
@@ -197,7 +197,7 @@ function createTrans() {
 			
 		} else {
 			$("#warning").text("Please choose a source state first");
-			$("#upper").css("height", "270px");
+			$("#upper").css("height", "210px");
 			$("#warning").show();
 			$("#info").hide();
 		}
@@ -226,6 +226,9 @@ function example() {
 function ajaxAction(data) {
 	
 	data += "&type=" + $("#type").html();
+    
+	// Hide tooltips fix
+	$("div[role='tooltip']").hide();
 	
     $.ajax({
     	url: "GetGraph",
@@ -264,6 +267,21 @@ function adjustTooltip() {
 	
 	$(document).tooltip({
 		items: "#solid .node text",
+        show: null, // show immediately 
+        hide: { effect: "" }, //fadeOut
+        position: { my: "left center", at: "right center" },
+        close: function(event, ui){
+            ui.tooltip.hover(
+                function () {
+                    $(this).stop(true).fadeTo(400, 1); 
+                },
+                function () {
+                    $(this).fadeOut("400", function(){
+                        $(this).remove(); 
+                    })
+                }
+            );
+        },
 		content: function() {
 			// Currently use sync ajax call
 			var title = $(this).parent().find("title").text();
@@ -275,7 +293,12 @@ function adjustTooltip() {
 		    }).responseText;
 		    response = $(response);
 		    adjustScale(0.5, response.find(".graph"));
-		    return $('<div>').append(response).clone().html();
+		    var container = $('<div>').append(response);
+		    $(container).css("height", 350);
+		    $(container).css("width", 280);
+		    $(container).css("overflow", "scroll");
+		    $(container).css("background", "white");
+		    return container;
 		}
 	});
 }
