@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class NSA {
 	 * A constructor for the NSA, receives a path to a file containing a graphviz format and generates
 	 * an NSA object. 
 	 */
-	public NSA(String path) throws NumberFormatException, IOException {
+	public NSA(String nsa_source) throws NumberFormatException, IOException {
 		stateCount = 0;
 		
 		this.greenSets = new ArrayList<Set<Integer>>();
@@ -55,7 +56,7 @@ public class NSA {
 		
 		transitionMap = new HashMap<String, List<Set<Integer>>>();
 		
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
+		BufferedReader bufferedReader = new BufferedReader(new StringReader(nsa_source));
 		
 		Pattern pstate_00 = Pattern.compile("(\\s*)q(\\d+) \\[label=\"q(\\d+)\"\\]"); //NOT starting, NOT accepting
 		//Pattern pstate_01 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"q(\\d+)\\$\"\\]"); //NOT starting, accepting
