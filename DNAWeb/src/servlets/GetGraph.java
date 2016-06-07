@@ -244,6 +244,7 @@ public class GetGraph extends HttpServlet {
 				sb.append(parents[i]);
 				sb.append(" -> ");
 				sb.append(i + 1);
+				sb.append("[dir = none]");
 				sb.append(System.getProperty("line.separator"));
 			}
 		}
