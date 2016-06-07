@@ -40,6 +40,7 @@ function deletePair() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a G-R pair to delete");
+		$("#upper").css("height", "270px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -56,6 +57,7 @@ function addToPair() {
 			addToPairMode = true;
 			var fromName = $(chosenNode).parent().find("title").text();
 			$("#info").text("Please choose a set to add state " + fromName + " to");
+			$("#upper").css("height", "270px");
 			$("#info").show();
 			$("#warning").hide();
 			
@@ -68,6 +70,7 @@ function addToPair() {
 			
 		} else {
 			$("#warning").text("Please choose a state first");
+			$("#upper").css("height", "270px");
 			$("#warning").show();
 			$("#info").hide();
 		}
@@ -105,6 +108,7 @@ function removeFromPair() {
 		}
 	} else {
 		$("#warning").text("Please choose a state to remove from a set");
+		$("#upper").css("height", "270px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -143,6 +147,7 @@ function deleteState() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a state to delete");
+		$("#upper").css("height", "270px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -165,6 +170,7 @@ function deleteTrans() {
 		ajaxAction(json);
 	} else {
 		$("#warning").text("Please choose a transition to delete");
+		$("#upper").css("height", "270px");
 		$("#warning").show();
 		$("#info").hide();
 	}
@@ -181,6 +187,7 @@ function createTrans() {
 			createTransMode = true;
 			var fromName = $(chosenNode).parent().find("title").text();
 			$("#info").text("Please choose a destination state to create transition from " + fromName);
+			$("#upper").css("height", "270px");
 			$("#info").show();
 			$("#warning").hide();
 			
@@ -190,6 +197,7 @@ function createTrans() {
 			
 		} else {
 			$("#warning").text("Please choose a source state first");
+			$("#upper").css("height", "270px");
 			$("#warning").show();
 			$("#info").hide();
 		}
@@ -279,6 +287,7 @@ function clearMessages() {
     addToPairMode = false;
     $("#warning").hide();
     $("#info").hide();
+    $("#upper").css("height", "200px");
 }
 
 function adjustScale(scale, graph) {
@@ -381,7 +390,9 @@ function buildDNA() {
 	} else {
 		$("#warning").text("Please make sure that graph contains at least one" +
 				" starting state and in case of a NBA at least one accepting state");
+		$("#upper").css("height", "270px");
 		$("#warning").show();
+		
 	}
 }
 
