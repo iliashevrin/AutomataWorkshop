@@ -1,8 +1,9 @@
 package dataobjects;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -23,10 +24,11 @@ import dataobjects.NSADNATree.DNATransition;
  */
 public class NSA {
 
-	
+	public String DODFullString;
 	private int stateCount;
 	private int annotationCount;
 	
+	final public static String SEPARATOR = "---------------------------------------------------------";
 	
 	private Set<Integer> startStates;
 	
@@ -43,7 +45,7 @@ public class NSA {
 	 * A constructor for the NSA, receives a path to a file containing a graphviz format and generates
 	 * an NSA object. 
 	 */
-	public NSA(String nsa_source) throws NumberFormatException, IOException {
+	public NSA(String path) throws NumberFormatException, IOException {
 		stateCount = 0;
 		
 		this.greenSets = new ArrayList<Set<Integer>>();
@@ -53,7 +55,7 @@ public class NSA {
 		
 		transitionMap = new HashMap<String, List<Set<Integer>>>();
 		
-		BufferedReader bufferedReader = new BufferedReader(new StringReader(nsa_source));
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
 		
 		Pattern pstate_00 = Pattern.compile("(\\s*)q(\\d+) \\[label=\"q(\\d+)\"\\]"); //NOT starting, NOT accepting
 		//Pattern pstate_01 = Pattern.compile("(\\s+)q(\\d+) \\[label=\"q(\\d+)\\$\"\\]"); //NOT starting, accepting
@@ -225,7 +227,8 @@ public class NSA {
 					return o1String.toString().compareTo(o2String.toString());
 			}
 		});
-		
+		DODFullString = "";
+		//DODsavestep(states);
 		recGenerateDNA(states, new NSADNATree(this));
 		
 		String stateString = "";
@@ -256,8 +259,41 @@ public class NSA {
 		{
 			transitionString += transition;
 		}
+		return DODFullString;
+	}
+	
+	private void DODsavestep(SortedSet<NSADNATree> states){
+		String stateString = "";
+		String transitionString = "";
 		
-		return stateString+transitionString;
+		int index = 0;
+		for(NSADNATree state : states)
+		{
+			stateString += String.format("		Q%d [label=\"%s\"]" + System.lineSeparator(), index, state.toString());
+			state.setTreeIndex(index);
+			index++;
+		}
+		
+		SortedSet<String> outputTransitions = new TreeSet<String>();
+		for(NSADNATree state : states)
+		{
+			for(String c : state.treeAlphabet)
+			{
+				DNATransition trans = state.transition(c);
+				String label = c + "[" + trans.k + "]";
+				
+				outputTransitions.add(String.format("				Q%d -> Q%d [label=\"%s\"]"+ System.lineSeparator(),
+						trans.originalState.getTreeIndex(),states.headSet(trans.resultState).size(), label)); //TODO more elegant solution?
+			}	
+		}
+		
+		for(String transition : outputTransitions)
+		{
+			transitionString += transition;
+		}
+		
+		DODFullString +=  stateString+transitionString;
+		DODFullString += SEPARATOR + "\n";
 	}
 	
 	/*
@@ -267,14 +303,18 @@ public class NSA {
 	{
 		if(!states.contains(tree))
 		{
+
 			states.add(tree);
-			
 			for(String c : transitionMap.keySet())
 			{
+				DODsavestep(states);
 				recGenerateDNA(states, tree.transition(c).resultState);
+				tree.treeAlphabet.add(c);
+				
 			}
-			
+			DODsavestep(states);
 		}
+
 	}
 	
 	

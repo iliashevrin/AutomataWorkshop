@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /*
@@ -14,8 +15,8 @@ import java.util.Set;
  * One using a linked tree, and the other using the standard two array representation.
  */
 public class NSADNATree {
-	
-    /*
+	public Set<String> treeAlphabet;   
+	/*
      * The underlying NSA associated with the DNA
 	 */
 	private NSA nsa;
@@ -115,7 +116,7 @@ public class NSADNATree {
 		tree = new int[3*nsa.getNPrime()];
 		annotations = new int[3*nsa.getNPrime()];
 		statesMap = new int[nsa.getStateCount()];
-		
+		treeAlphabet = new HashSet<String>();
 		Arrays.fill(tree, Integer.MAX_VALUE);
 		Arrays.fill(statesMap, Integer.MAX_VALUE);
 		Arrays.fill(annotations, Integer.MAX_VALUE);
