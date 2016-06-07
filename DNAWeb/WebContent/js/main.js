@@ -370,6 +370,7 @@ function buildDNA() {
 		
 		$(".container button, .container input, .container select").prop( "disabled", true );
 		$("#reset").prop( "disabled", false );
+		$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
 
 		dnaMode = true;
 		
@@ -381,6 +382,26 @@ function buildDNA() {
 				" starting state and at least one accepting state");
 		$("#warning").show();
 	}
+}
+
+function firstStep() {
+	var json = 'method=firstStep';
+	ajaxAction(json);
+}
+
+function prevStep() {
+	var json = 'method=prevStep';
+	ajaxAction(json);
+}
+
+function nextStep() {
+	var json = 'method=nextStep';
+	ajaxAction(json);
+}
+
+function lastStep() {
+	var json = 'method=lastStep';
+	ajaxAction(json);
 }
 
 function reset() {

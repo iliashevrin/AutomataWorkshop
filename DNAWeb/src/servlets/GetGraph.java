@@ -89,6 +89,26 @@ public class GetGraph extends HttpServlet {
 			loadDNA(dnaGraphVizString);
 			parseString = buildDNAGUIString();
 				
+		} else if ("firstStep".equals(method)) {
+			
+			loadDNA(NSAtoDNA.firstStep());
+			parseString = buildDNAGUIString();
+			
+		} else if ("prevStep".equals(method)) {
+
+			loadDNA(NSAtoDNA.prevStep());
+			parseString = buildDNAGUIString();
+			
+		} else if ("nextStep".equals(method)) {
+
+			loadDNA(NSAtoDNA.nextStep());
+			parseString = buildDNAGUIString();
+			
+		} else if ("lastStep".equals(method)) {
+
+			loadDNA(NSAtoDNA.lastStep());
+			parseString = buildDNAGUIString();
+			
 		} else if ("showInnerGraph".equals(method)) {
 			
 			parseString = showInnerGraph(request);

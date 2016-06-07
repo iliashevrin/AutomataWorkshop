@@ -37,4 +37,25 @@ public class NSAtoDNA {
 		curr_step = steps.length - 1;
 		return steps[curr_step];
 	}
+	
+	public static String firstStep () {
+		curr_step = 0;
+		return steps[curr_step];
+	}
+	
+	public static String prevStep () {
+		curr_step = (curr_step > 0) ? curr_step - 1 : 0;
+		return steps[curr_step];
+	}
+	
+	public static String nextStep () {
+		curr_step = (curr_step < steps.length - 1) ? curr_step + 1 : steps.length - 1;
+		return steps[curr_step];
+	}
+	
+	public static String lastStep () {
+		curr_step = steps.length - 1;
+		return steps[curr_step];
+	}
+	
 }
