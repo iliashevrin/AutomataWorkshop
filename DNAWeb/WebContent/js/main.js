@@ -223,7 +223,7 @@ function example() {
 	ajaxAction(json);
 }
 
-function ajaxAction(data) {
+function ajaxAction(data, build) {
 	
 	data += "&type=" + $("#type").html();
     
@@ -259,6 +259,10 @@ function ajaxAction(data) {
 	    		clearMessages();
 	    	    if (dnaMode) {
 	    	    	adjustTooltip();
+	    	    }
+	    	    if (build) {
+	    	    	checkStep();
+	    	    	$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
 	    	    }
     		}
     	}
@@ -420,13 +424,11 @@ function buildDNA() {
 		
 		$(".container button, .container input, .container select").prop( "disabled", true );
 		$("#reset").prop( "disabled", false );
-		$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
 
 		dnaMode = true;
 		
 		var json = 'method=buildDNA';
-		ajaxAction(json);
-		checkStep();
+		ajaxAction(json, true);
 	} else {
 		$("#warning").text("Please make sure that graph contains at least one" +
 				" starting state and in case of a NBA at least one accepting state");

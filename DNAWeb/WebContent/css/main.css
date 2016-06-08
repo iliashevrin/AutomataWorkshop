@@ -11,7 +11,7 @@
 	width: 140px;
 }
 
-button[disabled] {
+button[disabled], button:hover[disabled] {
 	color: #777777;
 }
 
