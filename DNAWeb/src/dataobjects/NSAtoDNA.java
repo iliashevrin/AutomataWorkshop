@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class NSAtoDNA {
+	public static int num_steps;
+	
 	private static String [] steps;
 	private static int curr_step;
 	
@@ -21,7 +23,7 @@ public class NSAtoDNA {
 		
 		//Fill "steps" array with step strings
 		String [] steps_temp_arr = steps_str.split(NSA.SEPARATOR);
-		int num_steps = 0;
+		num_steps = 0;
 		for (int i = 0; i < steps_temp_arr.length; i++) {
 			String curr = steps_temp_arr[i];
 			if (curr.trim().length() > 0)
