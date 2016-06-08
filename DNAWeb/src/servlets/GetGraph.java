@@ -59,6 +59,7 @@ public class GetGraph extends HttpServlet {
 			text += (NSAtoDNA.curr_step == 0) ? "1" : "0";
 			//Is this the last step?
 			text += (NSAtoDNA.curr_step == NSAtoDNA.num_steps-1) ? "1" : "0";
+			text += (NSAtoDNA.curr_step + 1) + "," + NSAtoDNA.num_steps;
 			response.setContentType("text/plain");
 			response.getWriter().write(text);
 		} else {

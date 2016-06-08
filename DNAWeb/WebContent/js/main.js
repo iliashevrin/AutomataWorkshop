@@ -245,6 +245,11 @@ function ajaxAction(data) {
     				//We are in last step
     				$("#next-step, #last-step").prop( "disabled", true );
     			}
+    			result = result.substring(2);
+    			var comma = result.indexOf(",");
+    			var curr = result.substring(0, comma);
+    			var size = result.substring(comma + 1);
+    			updateSteps(curr, size);
     		} else {
 		    	$("#solid").html(result);
 		    	if (!dnaMode) {
@@ -460,6 +465,10 @@ function lastStep() {
 	checkStep();
 }
 
+function updateSteps(curr, size) {
+	//TODO: Implement to change the step-string in the page to <curr>/<size>.
+	//Both curr and size are STRINGS!
+}
 
 
 function reset() {
@@ -474,4 +483,6 @@ function reset() {
 	
 	var json = 'method=reset';
 	ajaxAction(json);
+	$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", true );
+	updateSteps("??", "??");
 }
