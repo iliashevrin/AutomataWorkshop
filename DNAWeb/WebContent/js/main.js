@@ -262,7 +262,7 @@ function ajaxAction(data, build) {
 	    	    }
 	    	    if (build) {
 	    	    	checkStep();
-	    	    	$("#firs-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
+	    	    	$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
 	    	    }
     		}
     	}
