@@ -262,7 +262,7 @@ function ajaxAction(data, build) {
 	    	    }
 	    	    if (build) {
 	    	    	checkStep();
-	    	    	$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
+	    	    	$("#firs-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
 	    	    }
     		}
     	}
@@ -437,6 +437,54 @@ function buildDNA() {
 		
 	}
 }
+
+function bigStep() {
+	
+	// A way to test if there are starting and accepting states
+	if (dnaMode==false) {
+		if (!($("text:contains('start')").size() > 0 &&
+			$("ellipse+ellipse").size() > 0)) {
+			$("#warning").text("Please make sure that graph contains at least one" +
+			" starting state and at least one accepting state");
+			$("#warning").show();
+			return;
+		}
+		dnaMode=true;
+	}
+	
+	//$(".container button, .container input, .container select").prop( "disabled", true );
+	
+	$("#reset").prop( "disabled", false );
+	$("#small-step").prop( "disabled", false );
+	$("#big-step").prop( "disabled", false );
+	
+	var json = 'method=bigStep';
+	ajaxAction(json,false);	
+}
+
+function smallStep() {
+	
+	// A way to test if there are starting and accepting states
+	if (dnaMode==false) {
+		if (!($("text:contains('start')").size() > 0 &&
+			$("ellipse+ellipse").size() > 0)) {
+			$("#warning").text("Please make sure that graph contains at least one" +
+			" starting state and at least one accepting state");
+			$("#warning").show();
+			return;
+		}
+		dnaMode=true;
+	}
+			
+	$(".container button, .container input, .container select").prop( "disabled", true );
+	$("#reset").prop( "disabled", false );
+	$("#small-step").prop( "disabled", false );
+	$("#big-step").prop( "disabled", false );
+	
+	var json = 'method=smallStep';
+	ajaxAction(json,false);	
+}
+
 
 function checkStep() {
 	var json = 'method=checkStep';

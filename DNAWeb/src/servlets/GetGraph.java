@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import dataobjects.NBAtoDNA;
 import dataobjects.NSAtoDNA;
 import graphviz.GraphViz;
+import StepByStep.NbaSteps;
 
 /**
  * Servlet implementation class TestServlet
@@ -34,7 +35,9 @@ public class GetGraph extends HttpServlet {
 	private String grPairs;
 	private String dnaStates;
 	private String dnaTransitions;
-
+	private NbaSteps NbaStepGen=null;//an object for nba_steps
+	
+	
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -52,7 +55,6 @@ public class GetGraph extends HttpServlet {
 		
 		String type = request.getParameter("type");
 		String method = request.getParameter("method");
-		
 		if ("checkStep".equals(method)) {
 			String text = "#####";
 			//Is this the first step?
@@ -75,7 +77,6 @@ public class GetGraph extends HttpServlet {
 			}
 			
 			String parseString = "";
-			
 			if ("buildDNA".equals(method)) {
 				
 				// buildDNA is the method that takes a nba/nsa string in graph viz format
@@ -121,10 +122,31 @@ public class GetGraph extends HttpServlet {
 				parseString = buildDNAGUIString();
 				
 			} else if ("showInnerGraph".equals(method)) {
+				if (NbaStepGen!=null){
+					//nba steps is active. graphviz is made independently
+					parseString=NbaStepGen.ShowInnerGraph(request.getParameter("state"));
+				}else{
+					parseString = showInnerGraph(request);
+				}
 				
-				parseString = showInnerGraph(request);
+			}else if ("smallStep".equals(method)) {
+				//nba small step. graphviz is made independently
+				if (NbaStepGen == null){
+					NbaStepGen = new StepByStep.NbaSteps(states + transitions);
+				}								
+				NbaStepGen.makeNextStep();
+				parseString = NbaStepGen.BuildDnaGUIString();
 				
-			} else {
+			}else if ("bigStep".equals(method)) {
+				//nba big step. graphviz is made independently
+				if (NbaStepGen == null){
+					NbaStepGen = new StepByStep.NbaSteps(states + transitions);
+				}				
+				NbaStepGen.makeNextTrans();
+				parseString = NbaStepGen.BuildDnaGUIString();
+			}
+			
+			else {
 				
 				if ("createState".equals(method)) {
 					
@@ -173,7 +195,6 @@ public class GetGraph extends HttpServlet {
 				
 				parseString = buildGUIString();
 			}
-			
 			GraphViz gv = new GraphViz();
 			gv.addln(gv.start_graph());
 			Scanner scanner = new Scanner(parseString);
@@ -182,7 +203,6 @@ public class GetGraph extends HttpServlet {
 				gv.addln(line);
 			}
 			scanner.close();
-			 
 			byte[] graph = gv.getGraph(gv.getDotSource(), TYPE, REP_TYPE);
 			String text = new String(graph, "UTF-8");
 			response.setContentType("text/plain");
@@ -396,6 +416,7 @@ public class GetGraph extends HttpServlet {
 		dnaStates = "";
 		dnaTransitions = "";
 		grPairs = "";
+		NbaStepGen=null;
 	}
 	
 	private void loadExample(HttpServletRequest request) {
