@@ -469,7 +469,6 @@ function updateSteps(curr, size) {
 	//TODO: Implement to change the step-string in the page to <curr>/<size>.
 	//Both curr and size are STRINGS!
 	
-	$("#step-data").show();
 	$("#step-data").html(curr + " / " + size);
 }
 

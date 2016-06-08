@@ -11,6 +11,10 @@
 	width: 140px;
 }
 
+button[disabled] {
+	color: #777777;
+}
+
 text {
 	cursor: pointer;
 }
