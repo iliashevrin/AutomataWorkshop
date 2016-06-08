@@ -235,7 +235,7 @@ function ajaxAction(data, build) {
     	data: data,
     	type: "POST",
     	success: function(result){
-    		if (result.startsWith("#####")) {
+    		if (result.indexOf("#####") == 0) {
     			$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
     			result = result.substring(5);
     			if(result.substring(0, 1) === "1") {
