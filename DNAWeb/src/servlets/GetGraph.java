@@ -503,10 +503,15 @@ public class GetGraph extends HttpServlet {
 	
 	
 	private void loadDNA(String dna) {
-		
-		int divide = dna.substring(0, dna.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
-		dnaStates = dna.substring(0, divide + 2);
-		dnaTransitions = dna.substring(divide + 2, dna.length());
+		int ind_arrow = dna.indexOf("->");
+		if (ind_arrow == -1) {
+			dnaStates = dna;
+			dnaTransitions = "";
+		} else {
+			int divide = dna.substring(0, ind_arrow).lastIndexOf(System.getProperty("line.separator"));
+			dnaStates = dna.substring(0, divide + 2);
+			dnaTransitions = dna.substring(divide + 2, dna.length());
+		}
 	}
 
 	private String buildGUIString() {

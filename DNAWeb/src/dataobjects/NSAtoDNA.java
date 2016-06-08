@@ -24,14 +24,14 @@ public class NSAtoDNA {
 		int num_steps = 0;
 		for (int i = 0; i < steps_temp_arr.length; i++) {
 			String curr = steps_temp_arr[i];
-			if (!curr.equals("") && !curr.equals("\n") && !curr.equals("\n\n"))
+			if (curr.trim().length() > 0)
 				num_steps++;
 		}
 		steps = new String [num_steps];
 		num_steps = 0;
 		for (int i = 0; i < steps_temp_arr.length; i++) {
 			String curr = steps_temp_arr[i];
-			if (!curr.equals("") && !curr.equals("\n") && !curr.equals("\n\n"))
+			if (curr.trim().length() > 0)
 				steps[num_steps++] = curr;
 		}		
 		curr_step = steps.length - 1;
