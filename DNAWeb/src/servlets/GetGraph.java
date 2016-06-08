@@ -53,129 +53,140 @@ public class GetGraph extends HttpServlet {
 		String type = request.getParameter("type");
 		String method = request.getParameter("method");
 		
-		if ("nba".equals(type)) {
-			isNba = true;
-		} else if ("nsa".equals(type)) {
-			isNba = false;
-		}
-		
-		if (method == null) {
-			return;
-		}
-		
-		String parseString = "";
-		
-		if ("buildDNA".equals(method)) {
-			
-			// buildDNA is the method that takes a nba/nsa string in graph viz format
-			// and outputs a dna string in graph viz format
-			// Replace it if necessary with your implementation
-			
-	
-			String nbaGraphVizString = states + transitions;
-			String dnaGraphVizString;
-			
-			if (!isNba) {
-				nbaGraphVizString += grPairs;
-				
-				// NSA to DNA
-				dnaGraphVizString = NSAtoDNA.buildDNA(nbaGraphVizString);
-			} else {
-				
-				// NBA to DNA
-				dnaGraphVizString = NBAtoDNA.buildDNA(nbaGraphVizString);
-			}
-			
-			loadDNA(dnaGraphVizString);
-			parseString = buildDNAGUIString();
-				
-		} else if ("firstStep".equals(method)) {
-			
-			loadDNA(NSAtoDNA.firstStep());
-			parseString = buildDNAGUIString();
-			
-		} else if ("prevStep".equals(method)) {
-
-			loadDNA(NSAtoDNA.prevStep());
-			parseString = buildDNAGUIString();
-			
-		} else if ("nextStep".equals(method)) {
-
-			loadDNA(NSAtoDNA.nextStep());
-			parseString = buildDNAGUIString();
-			
-		} else if ("lastStep".equals(method)) {
-
-			loadDNA(NSAtoDNA.lastStep());
-			parseString = buildDNAGUIString();
-			
-		} else if ("showInnerGraph".equals(method)) {
-			
-			parseString = showInnerGraph(request);
-			
+		if ("checkStep".equals(method)) {
+			String text = "#####";
+			//Is this the first step?
+			text += (NSAtoDNA.curr_step == 0) ? "1" : "0";
+			//Is this the last step?
+			text += (NSAtoDNA.curr_step == NSAtoDNA.num_steps-1) ? "1" : "0";
+			response.setContentType("text/plain");
+			response.getWriter().write(text);
 		} else {
 			
-			if ("createState".equals(method)) {
-				
-				createState(request);
-				
-			} else if ("deleteState".equals(method)) {
-				
-				deleteState(request);
-				
-			} else if ("createTrans".equals(method)) {
-				
-				createTrans(request);
-				
-			} else if ("deleteTrans".equals(method)) {
-				
-				deleteTrans(request);
-			
-			} else if ("reset".equals(method)) {
-				
-				resetGraph();
-				
-			} else if ("example".equals(method)) {
-				
-				loadExample(request);
-				
-			} else if ("createPair".equals(method)) {
-				
+			if ("nba".equals(type)) {
+				isNba = true;
+			} else if ("nsa".equals(type)) {
 				isNba = false;
-				createPair(request);
-				
-			} else if ("deletePair".equals(method)) {
-				
-				isNba = false;
-				deletePair(request);
-				
-			} else if ("addToPair".equals(method)) {
-				
-				isNba = false;
-				addToPair(request);
-				
-			} else if ("removeFromPair".equals(method)) {
-				
-				isNba = false;
-				removeFromPair(request);
 			}
 			
-			parseString = buildGUIString();
-		}
+			if (method == null) {
+				return;
+			}
+			
+			String parseString = "";
+			
+			if ("buildDNA".equals(method)) {
+				
+				// buildDNA is the method that takes a nba/nsa string in graph viz format
+				// and outputs a dna string in graph viz format
+				// Replace it if necessary with your implementation
+				
 		
-		GraphViz gv = new GraphViz();
-		gv.addln(gv.start_graph());
-		Scanner scanner = new Scanner(parseString);
-		while (scanner.hasNextLine()) {
-			String line = scanner.nextLine();
-			gv.addln(line);
+				String nbaGraphVizString = states + transitions;
+				String dnaGraphVizString;
+				
+				if (!isNba) {
+					nbaGraphVizString += grPairs;
+					
+					// NSA to DNA
+					dnaGraphVizString = NSAtoDNA.buildDNA(nbaGraphVizString);
+				} else {
+					
+					// NBA to DNA
+					dnaGraphVizString = NBAtoDNA.buildDNA(nbaGraphVizString);
+				}
+				
+				loadDNA(dnaGraphVizString);
+				parseString = buildDNAGUIString();
+					
+			} else if ("firstStep".equals(method)) {
+				
+				loadDNA(NSAtoDNA.firstStep());
+				parseString = buildDNAGUIString();
+				
+			} else if ("prevStep".equals(method)) {
+	
+				loadDNA(NSAtoDNA.prevStep());
+				parseString = buildDNAGUIString();
+				
+			} else if ("nextStep".equals(method)) {
+	
+				loadDNA(NSAtoDNA.nextStep());
+				parseString = buildDNAGUIString();
+				
+			} else if ("lastStep".equals(method)) {
+	
+				loadDNA(NSAtoDNA.lastStep());
+				parseString = buildDNAGUIString();
+				
+			} else if ("showInnerGraph".equals(method)) {
+				
+				parseString = showInnerGraph(request);
+				
+			} else {
+				
+				if ("createState".equals(method)) {
+					
+					createState(request);
+					
+				} else if ("deleteState".equals(method)) {
+					
+					deleteState(request);
+					
+				} else if ("createTrans".equals(method)) {
+					
+					createTrans(request);
+					
+				} else if ("deleteTrans".equals(method)) {
+					
+					deleteTrans(request);
+				
+				} else if ("reset".equals(method)) {
+					
+					resetGraph();
+					
+				} else if ("example".equals(method)) {
+					
+					loadExample(request);
+					
+				} else if ("createPair".equals(method)) {
+					
+					isNba = false;
+					createPair(request);
+					
+				} else if ("deletePair".equals(method)) {
+					
+					isNba = false;
+					deletePair(request);
+					
+				} else if ("addToPair".equals(method)) {
+					
+					isNba = false;
+					addToPair(request);
+					
+				} else if ("removeFromPair".equals(method)) {
+					
+					isNba = false;
+					removeFromPair(request);
+				}
+				
+				parseString = buildGUIString();
+			}
+			
+			GraphViz gv = new GraphViz();
+			gv.addln(gv.start_graph());
+			Scanner scanner = new Scanner(parseString);
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				gv.addln(line);
+			}
+			scanner.close();
+			 
+			byte[] graph = gv.getGraph(gv.getDotSource(), TYPE, REP_TYPE);
+			String text = new String(graph, "UTF-8");
+			response.setContentType("text/plain");
+			response.getWriter().write(text);
 		}
-		scanner.close();
-		 
-		byte[] graph = gv.getGraph(gv.getDotSource(), TYPE, REP_TYPE);
-		String text = new String(graph, "UTF-8");
-		response.setContentType("text/plain");
-		response.getWriter().write(text);
 	}
 
 	/**

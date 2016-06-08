@@ -235,16 +235,27 @@ function ajaxAction(data) {
     	data: data,
     	type: "POST",
     	success: function(result){
-    		
-	    	$("#solid").html(result);
-	    	if (!dnaMode) {
-	    		adjustFunctionality();
-	    	}
-    		adjustScale(0.66, $('.graph'));
-    		clearMessages();
-    	    if (dnaMode) {
-    	    	adjustTooltip();
-    	    }
+    		if (result.startsWith("#####")) {
+    			$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", false );
+    			result = result.substring(5);
+    			if(result.substring(0, 1) === "1") {
+    				//We are in first step
+    				$("#first-step, #prev-step").prop( "disabled", true );
+    			} if(result.substring(1, 2) === "1") {
+    				//We are in last step
+    				$("#next-step, #last-step").prop( "disabled", true );
+    			}
+    		} else {
+		    	$("#solid").html(result);
+		    	if (!dnaMode) {
+		    		adjustFunctionality();
+		    	}
+	    		adjustScale(0.66, $('.graph'));
+	    		clearMessages();
+	    	    if (dnaMode) {
+	    	    	adjustTooltip();
+	    	    }
+    		}
     	}
     });
 }
@@ -410,7 +421,7 @@ function buildDNA() {
 		
 		var json = 'method=buildDNA';
 		ajaxAction(json);
-		
+		checkStep();
 	} else {
 		$("#warning").text("Please make sure that graph contains at least one" +
 				" starting state and in case of a NBA at least one accepting state");
@@ -420,25 +431,36 @@ function buildDNA() {
 	}
 }
 
+function checkStep() {
+	var json = 'method=checkStep';
+	ajaxAction(json);
+}
+
 function firstStep() {
 	var json = 'method=firstStep';
 	ajaxAction(json);
+	checkStep();
 }
 
 function prevStep() {
 	var json = 'method=prevStep';
 	ajaxAction(json);
+	checkStep();
 }
 
 function nextStep() {
 	var json = 'method=nextStep';
 	ajaxAction(json);
+	checkStep();
 }
 
 function lastStep() {
 	var json = 'method=lastStep';
 	ajaxAction(json);
+	checkStep();
 }
+
+
 
 function reset() {
 	$(".container button, .container input, .container select").prop( "disabled", false );

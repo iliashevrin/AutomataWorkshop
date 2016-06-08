@@ -7,9 +7,9 @@ import java.util.ListIterator;
 
 public class NSAtoDNA {
 	public static int num_steps;
+	public static int curr_step;
 	
 	private static String [] steps;
-	private static int curr_step;
 	
 	public static String buildDNA(String nsaString) {
 		NSA nsa = null;
