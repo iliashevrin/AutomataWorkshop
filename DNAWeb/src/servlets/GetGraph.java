@@ -406,8 +406,8 @@ public class GetGraph extends HttpServlet {
 			String nba = Examples.NBA_EXAMPLES[num];
 		
 			int divide = nba.substring(0, nba.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
-			states = nba.substring(0, divide + 2);
-			transitions = nba.substring(divide + 2, nba.length());
+			states = nba.substring(0, divide + System.getProperty("line.separator").length());
+			transitions = nba.substring(divide + System.getProperty("line.separator").length(), nba.length());
 		
 			stateNumber = states.split(System.getProperty("line.separator")).length;
 		} else {
@@ -416,9 +416,9 @@ public class GetGraph extends HttpServlet {
 			// Divide states and rest
 			int divide1 = nsa.substring(0, nsa.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
 			int divide2 = nsa.substring(0, nsa.indexOf("_")).lastIndexOf(System.getProperty("line.separator"));
-			states = nsa.substring(0, divide1 + 2);
-			transitions = nsa.substring(divide1 + 2, divide2 + 2);
-			grPairs = nsa.substring(divide2 + 2, nsa.length());
+			states = nsa.substring(0, divide1 + System.getProperty("line.separator").length());
+			transitions = nsa.substring(divide1 + System.getProperty("line.separator").length(), divide2 + System.getProperty("line.separator").length());
+			grPairs = nsa.substring(divide2 + System.getProperty("line.separator").length(), nsa.length());
 			
 			stateNumber = states.split(System.getProperty("line.separator")).length;
 			grNumber = grPairs.split(System.getProperty("line.separator")).length / 2;
