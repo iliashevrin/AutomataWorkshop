@@ -97,7 +97,8 @@ public class TempDNA extends DNA {
 
     @Override
     public String toString() {
-        return super.toString();
+    	String res=super.toString();
+        return res;
     }
 
     public String stepRep(){

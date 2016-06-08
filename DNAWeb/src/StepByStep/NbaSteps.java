@@ -127,7 +127,6 @@ public class NbaSteps extends Construction {
     	return tempD.toString();
     }
     
-    
     public boolean isAddStartState(){
         return tempD.step==addStartState;
     }
@@ -169,7 +168,8 @@ public class NbaSteps extends Construction {
 	public String BuildDnaGUIString(){
     	String dnaTransitions="";
 		String dnaStates="";
-    	String [] lines=toString().split(System.lineSeparator());
+		String str=toString();
+    	String [] lines=str.split(System.lineSeparator());
 		for (int i=0;i<lines.length;i++){
 			String s=lines[i];
 			if (TempDNA.isEdgeLine(s) || TempDNA.isTempEdgeLine(s)){
@@ -185,7 +185,6 @@ public class NbaSteps extends Construction {
 				}
 			}
 		}
-    	
     	StringBuilder graphViz = new StringBuilder();
 		lines = dnaStates.split(System.lineSeparator());
 		graphViz.append("rankdir=LR");
