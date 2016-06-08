@@ -17,6 +17,7 @@ import graphviz.GraphViz;
 /**
  * Servlet implementation class TestServlet
  */
+//@WebServlet(name="GetGraph", urlPatterns={"/GetGraph"})
 @WebServlet("/GetGraph")
 public class GetGraph extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -403,11 +404,12 @@ public class GetGraph extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		if (isNba) {
+			
 			String nba = Examples.NBA_EXAMPLES[num];
 		
 			int divide = nba.substring(0, nba.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
-			states = nba.substring(0, divide + 2);
-			transitions = nba.substring(divide + 2, nba.length());
+			states = nba.substring(0, divide + System.getProperty("line.separator").length());
+			transitions = nba.substring(divide + System.getProperty("line.separator").length(), nba.length());
 		
 			stateNumber = states.split(System.getProperty("line.separator")).length;
 		} else {
@@ -416,9 +418,9 @@ public class GetGraph extends HttpServlet {
 			// Divide states and rest
 			int divide1 = nsa.substring(0, nsa.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
 			int divide2 = nsa.substring(0, nsa.indexOf("_")).lastIndexOf(System.getProperty("line.separator"));
-			states = nsa.substring(0, divide1 + 2);
-			transitions = nsa.substring(divide1 + 2, divide2 + 2);
-			grPairs = nsa.substring(divide2 + 2, nsa.length());
+			states = nsa.substring(0, divide1 + System.getProperty("line.separator").length());
+			transitions = nsa.substring(divide1 + System.getProperty("line.separator").length(), divide2 + System.getProperty("line.separator").length());
+			grPairs = nsa.substring(divide2 + System.getProperty("line.separator").length(), nsa.length());
 			
 			stateNumber = states.split(System.getProperty("line.separator")).length;
 			grNumber = grPairs.split(System.getProperty("line.separator")).length / 2;
@@ -551,7 +553,7 @@ public class GetGraph extends HttpServlet {
 		
 		if (!(lines.length > 0 && lines[0].equals(""))) {
 			for (int i = 0; i < lines.length; i++) {
-				
+		
 				stateName = lines[i].substring(0, lines[i].indexOf("["));
 				
 				// State name without the q
