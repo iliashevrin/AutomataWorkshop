@@ -17,6 +17,7 @@ import graphviz.GraphViz;
 /**
  * Servlet implementation class TestServlet
  */
+//@WebServlet(name="GetGraph", urlPatterns={"/GetGraph"})
 @WebServlet("/GetGraph")
 public class GetGraph extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -403,6 +404,7 @@ public class GetGraph extends HttpServlet {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		if (isNba) {
+			
 			String nba = Examples.NBA_EXAMPLES[num];
 		
 			int divide = nba.substring(0, nba.indexOf("->")).lastIndexOf(System.getProperty("line.separator"));
@@ -551,7 +553,7 @@ public class GetGraph extends HttpServlet {
 		
 		if (!(lines.length > 0 && lines[0].equals(""))) {
 			for (int i = 0; i < lines.length; i++) {
-				
+		
 				stateName = lines[i].substring(0, lines[i].indexOf("["));
 				
 				// State name without the q
