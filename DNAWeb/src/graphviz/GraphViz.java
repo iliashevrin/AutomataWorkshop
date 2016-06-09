@@ -140,7 +140,7 @@ public class GraphViz
      */
     public GraphViz() {
         if (GraphViz.osName.equals("Windows10")) {
-            this.tempDir = "c:/NBAtoDNA";
+            this.tempDir = "d:/NBAtoDNA";
             this.executable = "c:/Program Files (x86)/Graphviz 2.28/bin/dot.exe";
         } else if (GraphViz.osName.equals("Windows7")) {
             this.tempDir = "c:/NBAtoDNA";
