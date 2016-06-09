@@ -516,6 +516,7 @@ public class GetGraph extends HttpServlet {
 	
 	
 	private void loadDNA(String dna) {
+		dna = dna.trim(); // Safety measures
 		int ind_arrow = dna.indexOf("->");
 		if (ind_arrow == -1) {
 			dnaStates = dna;
@@ -525,6 +526,11 @@ public class GetGraph extends HttpServlet {
 			dnaStates = dna.substring(0, divide + System.getProperty("line.separator").length());
 			dnaTransitions = dna.substring(divide + System.getProperty("line.separator").length(), dna.length());
 		}
+		
+		System.out.println("After the parsing of DNA");
+		System.out.println("Dna: " + dna);
+		System.out.println("States: " + dnaStates);
+		System.out.println("Trans: " + dnaTransitions);
 	}
 
 	private String buildGUIString() {
@@ -637,6 +643,7 @@ public class GetGraph extends HttpServlet {
 		graphViz.append(System.getProperty("line.separator"));
 		graphViz.append("node [shape = circle]; ");
 		for (int i = 0; i < lines.length; i++) {
+			
 			graphViz.append("Q");
 			graphViz.append(i);
 			graphViz.append(" ");
