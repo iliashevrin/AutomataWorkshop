@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ import graphviz.GraphViz;
  * Servlet implementation class TestServlet
  */
 //@WebServlet(name="GetGraph", urlPatterns={"/GetGraph"})
-@WebServlet("/GetGraph")
+//@WebServlet("/GetGraph")
 public class GetGraph extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -523,8 +522,8 @@ public class GetGraph extends HttpServlet {
 			dnaTransitions = "";
 		} else {
 			int divide = dna.substring(0, ind_arrow).lastIndexOf(System.getProperty("line.separator"));
-			dnaStates = dna.substring(0, divide + 2);
-			dnaTransitions = dna.substring(divide + 2, dna.length());
+			dnaStates = dna.substring(0, divide + System.getProperty("line.separator").length());
+			dnaTransitions = dna.substring(divide + System.getProperty("line.separator").length(), dna.length());
 		}
 	}
 
