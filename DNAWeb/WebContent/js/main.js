@@ -452,8 +452,7 @@ function bigStep() {
 		dnaMode=true;
 	}
 	
-	//$(".container button, .container input, .container select").prop( "disabled", true );
-	
+	$(".container button, .container input, .container select").prop( "disabled", true );
 	$("#reset").prop( "disabled", false );
 	$("#small-step").prop( "disabled", false );
 	$("#big-step").prop( "disabled", false );
