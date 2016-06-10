@@ -201,6 +201,34 @@ public class NSADNATree {
 		this.root = treeArray[0];
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(annotations);
+		result = prime * result + Arrays.hashCode(statesMap);
+		result = prime * result + Arrays.hashCode(tree);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NSADNATree other = (NSADNATree) obj;
+		if (!Arrays.equals(annotations, other.annotations))
+			return false;
+		if (!Arrays.equals(statesMap, other.statesMap))
+			return false;
+		if (!Arrays.equals(tree, other.tree))
+			return false;
+		return true;
+	}
+
 	/*
 	 * Perform seniority fix stage
 	 */

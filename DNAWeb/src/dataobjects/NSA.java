@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,7 +33,7 @@ public class NSA {
 	final public static String SEPARATOR = "---------------------------------------------------------";
 	
 	private Set<Integer> startStates;
-	
+	private List<NSADNATree> states_names;
 	private List<Set<Integer>> redSets;
 	private List<Set<Integer>> greenSets;
 	
@@ -211,6 +212,7 @@ public class NSA {
 	 */
 	public String convertToDNA()
 	{
+		states_names = new LinkedList<NSADNATree>();
 		SortedSet<NSADNATree> states = new TreeSet<NSADNATree>(new Comparator<NSADNATree>() {
 			@Override
 			public int compare(NSADNATree o1, NSADNATree o2) {
@@ -270,7 +272,8 @@ public class NSA {
 		int index = 0;
 		for(NSADNATree state : states)
 		{
-			stateString += String.format("		Q%d [label=\"%s\"]" + System.lineSeparator(), index, state.toString());
+			//stateString += String.format("		Q%d [label=\"%s\"]" + System.lineSeparator(), index, state.toString());
+			stateString += String.format("		Q%d [label=\"%s\"]" + System.lineSeparator(), states_names.indexOf(state), state.toString());
 			state.setTreeIndex(index);
 			index++;
 		}
@@ -284,7 +287,8 @@ public class NSA {
 				String label = c + "[" + trans.k + "]";
 				
 				outputTransitions.add(String.format("				Q%d -> Q%d [label=\"%s\"]"+ System.lineSeparator(),
-						trans.originalState.getTreeIndex(),states.headSet(trans.resultState).size(), label)); //TODO more elegant solution?
+				//		trans.originalState.getTreeIndex(),states.headSet(trans.resultState).size(), label)); //TODO more elegant solution?
+						states_names.indexOf(trans.originalState),states_names.indexOf(trans.resultState), label)); //TODO more elegant solution?
 			}	
 		}
 		
@@ -304,7 +308,7 @@ public class NSA {
 	{
 		if(!states.contains(tree))
 		{
-
+			states_names.add(tree);
 			states.add(tree);
 			for(String c : transitionMap.keySet())
 			{
