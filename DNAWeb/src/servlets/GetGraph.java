@@ -203,6 +203,7 @@ public class GetGraph extends HttpServlet {
 				gv.addln(line);
 			}
 			scanner.close();
+            gv.addln(gv.end_graph());
 			byte[] graph = gv.getGraph(gv.getDotSource(), TYPE, REP_TYPE);
 			String text = new String(graph, "UTF-8");
 			response.setContentType("text/plain");
