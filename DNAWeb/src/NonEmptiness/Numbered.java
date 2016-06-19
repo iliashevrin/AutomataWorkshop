@@ -19,7 +19,7 @@ class Numbered {
     {
         // The label on states is currently unused, it only conveys information about the original Buchi automaton
         Pattern statePattern = Pattern.compile("^\\s*(?<id>\\w+)\\s\\[label=\"(?<label>.+)\"\\]$");
-        Pattern transitionPattern = Pattern.compile("^\\s+(?<startID>\\w+)\\s->\\s(?<nextID>\\w+)\\s\\[label=\"(?<character>\\w)\\[(?<number>\\d+)\\]\"\\]$");
+        Pattern transitionPattern = Pattern.compile("^\\s*(?<startID>\\w+)\\s->\\s(?<nextID>\\w+)\\s\\[label=\"(?<character>\\w)\\[(?<number>\\d+)\\]\"\\]$");
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             for (String line : (Iterable<String>)reader.lines()::iterator) {
