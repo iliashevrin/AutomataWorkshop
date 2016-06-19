@@ -250,7 +250,11 @@ function ajaxAction(data, build) {
     			var curr = result.substring(0, comma);
     			var size = result.substring(comma + 1);
     			updateSteps(curr, size);
-    		} else {
+    		} 
+            else if (result.indexOf("Empty") == 0 || result.indexOf("NonEmpty") == 0) {
+                window.alert(result);
+            }
+            else {
 		    	$("#solid").html(result);
 		    	if (!dnaMode) {
 		    		adjustFunctionality();
@@ -424,6 +428,7 @@ function buildDNA() {
 		
 		$(".container button, .container input, .container select").prop( "disabled", true );
 		$("#reset").prop( "disabled", false );
+        $("#emptiness").prop("disabled", false);
 
 		dnaMode = true;
 		
@@ -436,6 +441,17 @@ function buildDNA() {
 		$("#warning").show();
 		
 	}
+}
+
+function checkEmptiness() {
+    //if (dnaMode==true) {
+       	var json = 'method=checkEmptiness';
+        ajaxAction(json, false);
+    //}
+    //else {
+    //    $("#warning").text("Please convert to DNA first");
+    //   $("#warning").show();
+    //}
 }
 
 function bigStep() {
@@ -456,6 +472,7 @@ function bigStep() {
 	$("#reset").prop( "disabled", false );
 	$("#small-step").prop( "disabled", false );
 	$("#big-step").prop( "disabled", false );
+	$("#emptiness").prop("disabled", false );
 	
 	var json = 'method=bigStep';
 	ajaxAction(json,false);	
@@ -479,6 +496,7 @@ function smallStep() {
 	$("#reset").prop( "disabled", false );
 	$("#small-step").prop( "disabled", false );
 	$("#big-step").prop( "disabled", false );
+	$("#emptiness").prop("disabled", false );
 	
 	var json = 'method=smallStep';
 	ajaxAction(json,false);	
@@ -535,5 +553,6 @@ function reset() {
 	var json = 'method=reset';
 	ajaxAction(json);
 	$("#first-step, #prev-step, #next-step, #last-step").prop( "disabled", true );
+	$("#emptiness").prop( "disabled", true );
 	updateSteps("??", "??");
 }
