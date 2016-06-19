@@ -13,6 +13,7 @@ import dataobjects.NBAtoDNA;
 import dataobjects.NSAtoDNA;
 import graphviz.GraphViz;
 import StepByStep.NbaSteps;
+import NonEmptiness.NonEmpty;
 
 /**
  * Servlet implementation class TestServlet
@@ -55,6 +56,14 @@ public class GetGraph extends HttpServlet {
 		
 		String type = request.getParameter("type");
 		String method = request.getParameter("method");
+
+        if ("checkEmptiness".equals(method)) {
+            String text = NonEmpty.checkEmptiness(dnaStates + dnaTransitions);
+			response.setContentType("text/plain");
+			response.getWriter().write(text);
+            return;
+        }
+
 		if ("checkStep".equals(method)) {
 			String text = "#####";
 			//Is this the first step?
